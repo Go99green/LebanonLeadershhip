@@ -14,7 +14,6 @@ import {
   Layers3,
   LineChart as LineChartIcon,
   Menu,
-  MessageSquareMore,
   MonitorSmartphone,
   Mountain,
   ShieldCheck,
@@ -45,6 +44,7 @@ import {
 } from "recharts";
 
 type Framework = "hall" | "globe";
+type ReferenceItem = { text: string; url: string };
 
 const team = [
   {
@@ -207,22 +207,35 @@ const doItems = [
   "Navigate Economic Volatility: Be prepared for a decentralized, cash-reliant business environment and maintain acute awareness of currency fluctuations (World Bank, 2026).",
 ];
 
-const references = [
-  { text: "Commisceo Global. (2026). Lebanon - Culture, Customs and Etiquette.", url: "https://www.commisceo-global.com/resources/country-guides/lebanon-guide" },
-  { text: "Embassy of Lebanon. (2026). History and Geography of Lebanon.", url: "https://www.lebanonembassyus.org/history-geography" },
-  { text: "Hofstede Insights. (2021). Country Comparison: Lebanon.", url: "https://www.hofstede-insights.com/country-comparison-tool" },
-  { text: "House, R. J., Hanges, P. J., Javidan, M., Dorfman, P. W., & Gupta, V. (2004). Culture, Leadership, and Organizations: The GLOBE Study of 62 Societies. Sage Publications.", url: "https://sk.sagepub.com/books/culture-leadership-and-organizations" },
-  { text: "The Policy Initiative. (2025). Understanding Lebanon's Political Economy.", url: "https://www.thepolicyinitiative.org" },
-  { text: "World Bank. (2026). Lebanon Economic Monitor: A Fragile Rebound.", url: "https://openknowledge.worldbank.org/entities/publication/1d41204e-ab25-462b-95e1-679010838bd3" },
-  { text: "Yahchouchi, G. (2026). The Impact of Culture on Leadership Styles in Lebanon. ResearchGate.", url: "https://www.researchgate.net" },
-];
-  "Commisceo Global. (2026). Lebanon - Culture, Customs and Etiquette.",
-  "Embassy of Lebanon. (2026). History and Geography of Lebanon.",
-  "Hofstede Insights. (2021). Country Comparison: Lebanon.",
-  "House, R. J., Hanges, P. J., Javidan, M., Dorfman, P. W., & Gupta, V. (2004). Culture, Leadership, and Organizations: The GLOBE Study of 62 Societies. Sage Publications.",
-  "The Policy Initiative. (2025). Understanding Lebanon's Political Economy.",
-  "World Bank. (2026). Lebanon Economic Monitor: A Fragile Rebound.",
-  "Yahchouchi, G. (2026). The Impact of Culture on Leadership Styles in Lebanon. ResearchGate.",
+const references: ReferenceItem[] = [
+  {
+    text: "Commisceo Global. (2026). Lebanon - Culture, Customs and Etiquette.",
+    url: "https://www.commisceo-global.com/resources/country-guides/lebanon-guide",
+  },
+  {
+    text: "Embassy of Lebanon. (2026). History and Geography of Lebanon.",
+    url: "https://www.lebanonembassyus.org/history-geography",
+  },
+  {
+    text: "Hofstede Insights. (2021). Country Comparison: Lebanon.",
+    url: "https://www.hofstede-insights.com/country-comparison-tool",
+  },
+  {
+    text: "House, R. J., Hanges, P. J., Javidan, M., Dorfman, P. W., & Gupta, V. (2004). Culture, Leadership, and Organizations: The GLOBE Study of 62 Societies. Sage Publications.",
+    url: "https://sk.sagepub.com/books/culture-leadership-and-organizations",
+  },
+  {
+    text: "The Policy Initiative. (2025). Understanding Lebanon's Political Economy.",
+    url: "https://www.thepolicyinitiative.org",
+  },
+  {
+    text: "World Bank. (2026). Lebanon Economic Monitor: A Fragile Rebound.",
+    url: "https://openknowledge.worldbank.org/entities/publication/1d41204e-ab25-462b-95e1-679010838bd3",
+  },
+  {
+    text: "Yahchouchi, G. (2026). The Impact of Culture on Leadership Styles in Lebanon. ResearchGate.",
+    url: "https://www.researchgate.net",
+  },
 ];
 
 function Cite({ refs }: { refs: number[] }) {
@@ -244,7 +257,6 @@ function Section({
 }) {
   return (
     <section id={id} className="scroll-mt-20 mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
-    <section id={id} className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
       <div className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-tactical-300">
           {eyebrow}
@@ -409,7 +421,6 @@ export default function Page() {
       <div className="pointer-events-none absolute bottom-[-8%] right-[-8%] h-[420px] w-[420px] rounded-full bg-amberish-500/15 blur-3xl" />
 
       <header className="sticky top-0 z-50 border-b border-[#1f2833] bg-black/60 backdrop-blur-xl">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-tactical-400/30 bg-tactical-500/10">
@@ -665,7 +676,6 @@ export default function Page() {
             <p className="mt-4 text-sm leading-7 text-neutral-300">
               {framework === "hall"
                 ? "High-Context communication means meaning is embedded in the physical context or internalized in the person, rather than explicitly stated. Hofstede’s Power Distance: Lebanon scores high; hierarchies are accepted as a natural part of the social order, and authority is rarely challenged directly in business settings (Yahchouchi, 2026). Hofstede’s Collectivism: High collectivism. The \"in-group\" (family and religious community) takes precedence over the individual, making loyalty paramount (Hofstede, 2021)."
-                ? "Hofstede’s Power Distance: Lebanon scores high; hierarchies are accepted as a natural part of the social order, and authority is rarely challenged directly in business settings (Yahchouchi, 2026). Hofstede’s Collectivism: High collectivism. The \"in-group\" (family and religious community) takes precedence over the individual, making loyalty paramount (Hofstede, 2021)."
                 : "GLOBE Study - Assertiveness: Lebanese culture tends to be highly assertive and expressive, placing a strong premium on robust negotiation skills and charismatic communication (House et al., 2004)."}
             </p>
 
@@ -897,7 +907,6 @@ export default function Page() {
               <div className="text-sm font-semibold text-white">Executive takeaway</div>
               <p className="mt-3 text-sm leading-7 text-neutral-300">
                 Economy: The World Bank characterizes the current state as a "Fragile Rebound." Real GDP expanded by 3.5% in 2025, signaling a slow recovery from the 2019 financial crisis, operating heavily in a cash-based environment (World Bank, 2026). Politics: The government operates under "Confessionalism," a power-sharing agreement where legislative and executive seats are distributed according to religious demographics, which heavily dictates resource distribution and institutional leadership (Policy Initiative, 2025).
-                Economy: The World Bank characterizes the current state as a "Fragile Rebound." Real GDP expanded by 3.5% in 2025, signaling a slow recovery from the 2019 financial crisis, operating heavily in a cash-based environment (World Bank, 2026). Politics: The government operates under "Confessionalism," a power-sharing system divided among religious sects, which heavily dictates resource distribution and institutional leadership (Policy Initiative, 2025).
               </p>
             </div>
           </div>
@@ -914,7 +923,6 @@ export default function Page() {
           {doItems.map((item, index) => (
             <FadeIn key={item} delay={index * 0.04}>
               <div className="rounded-[1.6rem] border border-tactical-300/20 bg-tactical-500/10 p-5 shadow-glow transition-transform hover:scale-105">
-              <div className="rounded-[1.6rem] border border-tactical-300/20 bg-tactical-500/10 p-5 shadow-glow">
                 <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-xs font-semibold">
                   0{index + 1}
                 </div>
@@ -934,17 +942,6 @@ export default function Page() {
         <div className="mb-5 flex items-center gap-3">
           <FileText className="h-5 w-5 text-tactical-200" />
           <p className="text-sm font-semibold text-white">Citation index</p>
-        </div>
-        <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
-          <div className="space-y-3 text-sm leading-7 text-neutral-200 md:text-base">
-            {references.map((reference, index) => (
-              <FadeIn key={reference} delay={index * 0.04}>
-                <p className="rounded-2xl border border-white/10 bg-neutral-950/50 px-4 py-3">
-                  {reference}
-                </p>
-              </FadeIn>
-            ))}
-          </div>
         </div>
         <details className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow" open>
           <summary className="cursor-pointer list-none text-sm font-semibold text-white">
@@ -1010,12 +1007,6 @@ export default function Page() {
                 <p>
                   “Leadership and organizational success are heavily reliant on social networks and influence in Lebanese business environments.” (Yahchouchi, 2026)
                 </p>
-                <h3 className="font-display text-xl font-semibold text-white">Final project quality check</h3>
-              </div>
-              <div className="space-y-3 text-sm leading-7 text-neutral-300">
-                <p>✓ All framework, geography/history, economy/politics, and organizational-practice claims are embedded directly in the narrative.</p>
-                <p>✓ All required in-text citations are kept exactly as requested.</p>
-                <p>✓ Development meta elements were removed so the submission reads as a finished academic deliverable.</p>
               </div>
             </div>
 
