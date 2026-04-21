@@ -24,6 +24,10 @@ body {
   font-family: "Playfair Display", "Times New Roman", Georgia, serif;
 }
 
+.text-tactical-orange {
+  color: #ff4500;
+}
+
 ::selection {
   background: rgba(126, 183, 167, 0.25);
   color: #ffffff;
