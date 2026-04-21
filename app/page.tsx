@@ -7,12 +7,10 @@ import {
   Briefcase,
   ChevronRight,
   Globe2,
-  Github,
   GraduationCap,
   Landmark,
   Layers3,
   LineChart as LineChartIcon,
-  MapPinned,
   MessageSquareMore,
   MonitorSmartphone,
   Mountain,
@@ -42,7 +40,6 @@ import {
   YAxis,
 } from "recharts";
 
-type Mode = "website" | "presentation";
 type Framework = "hall" | "globe";
 
 const team = [
@@ -74,7 +71,7 @@ const nav = [
   ["origins", "Origins"],
   ["leadership", "Leadership"],
   ["takeaways", "Takeaways"],
-  ["sources", "Sources"],
+  ["references", "References"],
   ["team", "Team"],
 ] as const;
 
@@ -171,18 +168,18 @@ const leadershipCards = [
     icon: MessageSquareMore,
     title: "Communication",
     points: [
-      "Meaning often lives in tone, timing, and relationship, not only in literal words.",
-      "Leaders should avoid unnecessary public bluntness and protect dignity.",
-      "High-context communication rewards people who can read the room well.",
+      "Wasta: Leadership and organizational success are heavily reliant on Wasta—the use of social networks, connections, and influence to achieve business goals. It acts as the primary \"social glue\" in Lebanese business environments (Yahchouchi, 2026).",
+      "High-context communication rewards leaders who can interpret nuance, tone, and social signals before moving decisions forward.",
+      "Leaders should avoid unnecessary public bluntness and protect dignity during disagreement.",
     ],
   },
   {
     icon: ShieldCheck,
     title: "Authority",
     points: [
+      "Paternalism: Organizational practices are highly paternalistic. Managers are expected to act as \"father figures,\" caring for the personal well-being and extended families of employees in exchange for absolute professional loyalty (Commisceo Global, 2026).",
       "Status and hierarchy matter, especially early in a relationship.",
       "Formal authority works best when paired with warmth and credibility.",
-      "Leaders are judged through both title and personal character.",
     ],
   },
   {
@@ -197,11 +194,11 @@ const leadershipCards = [
 ];
 
 const doItems = [
-  "Build trust before pushing decisions, deadlines, or change.",
-  "Respect titles, hierarchy, and seniority signals.",
-  "Communicate with tact and protect face when giving feedback.",
-  "Read social cues and adapt tone to the room.",
-  "Stay consistent and dependable while remaining flexible.",
+  "Prioritize Relationship-Building (Wasta): Business is deeply personal. Never rush into a deal without first establishing trust through social interaction and shared meals.",
+  "Respect the Hierarchy: Acknowledge the most senior person in the room first; top-down decision-making is the norm.",
+  "High-Context Communication: Utilize and interpret indirect language to avoid \"loss of face.\" A \"no\" is rarely stated directly; leaders must listen for subtle cues.",
+  "Emphasize Honor and Reputation: Avoid public criticism at all costs. Corrections and feedback must be handled privately to preserve the individual's honor.",
+  "Navigate Economic Volatility: Be prepared for a decentralized, cash-reliant business environment and maintain acute awareness of currency fluctuations (World Bank, 2026).",
 ];
 
 const dontItems = [
@@ -281,12 +278,12 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="mx-auto max-w-7xl px-6 py-16 md:px-10 md:py-24">
+    <section id={id} className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
       <div className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-tactical-300">
           {eyebrow}
         </p>
-        <h2 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-white md:text-5xl">
+        <h2 className="font-display mt-3 text-balance text-3xl font-semibold tracking-tight text-white md:text-5xl">
           {title}
         </h2>
         {subtitle ? (
@@ -407,7 +404,6 @@ function LebanonMap() {
 }
 
 export default function Page() {
-  const [mode, setMode] = useState<Mode>("website");
   const [framework, setFramework] = useState<Framework>("hall");
 
   const chartTitle = useMemo(() => {
@@ -416,8 +412,6 @@ export default function Page() {
       : "GLOBE lens: regional proxy for leadership expectations";
   }, [framework]);
 
-  const compact = mode === "presentation";
-
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-neutral-950 text-white">
       <div className="pointer-events-none absolute inset-0 bg-mesh opacity-60" />
@@ -425,7 +419,7 @@ export default function Page() {
       <div className="pointer-events-none absolute left-[-10%] top-[-6%] h-[420px] w-[420px] rounded-full bg-tactical-500/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-8%] right-[-8%] h-[420px] w-[420px] rounded-full bg-amberish-500/15 blur-3xl" />
 
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-tactical-400/30 bg-tactical-500/10">
@@ -449,32 +443,17 @@ export default function Page() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setMode("website")}
-              className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                mode === "website"
-                  ? "bg-white text-neutral-950"
-                  : "border border-white/10 bg-white/5 text-white hover:bg-white/10"
-              }`}
-            >
-              Website mode
-            </button>
-            <button
-              onClick={() => setMode("presentation")}
-              className={`rounded-2xl px-4 py-2 text-sm font-semibold transition ${
-                mode === "presentation"
-                  ? "bg-white text-neutral-950"
-                  : "border border-white/10 bg-white/5 text-white hover:bg-white/10"
-              }`}
-            >
-              Presentation mode
-            </button>
-          </div>
+          <a
+            href="#references"
+            className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            References
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
       </header>
 
-      <section className={`relative mx-auto max-w-7xl px-6 ${compact ? "py-16 md:py-20" : "py-16 md:py-24"} md:px-10`}>
+      <section className="relative mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
         <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
           <div>
             <motion.div
@@ -490,9 +469,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.06 }}
-              className={`mt-6 max-w-5xl text-balance font-semibold tracking-tight text-white ${
-                compact ? "text-4xl md:text-6xl" : "text-4xl md:text-6xl xl:text-7xl"
-              }`}
+              className="font-display mt-6 max-w-5xl text-balance text-4xl font-semibold tracking-tight text-white md:text-6xl xl:text-7xl"
             >
               Lebanon, leadership, and the power of high-context culture.
             </motion.h1>
@@ -501,7 +478,7 @@ export default function Page() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.12 }}
-              className={`mt-6 max-w-3xl text-neutral-300 ${compact ? "text-lg leading-8" : "text-base leading-8 md:text-lg"}`}
+              className="mt-6 max-w-3xl text-base leading-8 text-neutral-300 md:text-lg"
             >
               This analysis explains how geography, history, institutions, and economic conditions shape
               leadership behavior in Lebanon and what managers should do in practice.<Cite refs={[1, 3, 4, 6, 8]} />
@@ -571,7 +548,7 @@ export default function Page() {
               <div className="mb-4 flex items-center justify-between">
                 <div>
                   <div className="text-sm font-semibold text-white">Core thesis</div>
-                  <div className="mt-1 text-sm text-neutral-400">The argument the whole website supports</div>
+                  <div className="mt-1 text-sm text-neutral-400">Executive thesis for leadership practice</div>
                 </div>
                 <MonitorSmartphone className="h-5 w-5 text-neutral-400" />
               </div>
@@ -897,47 +874,20 @@ export default function Page() {
       <Section
         id="takeaways"
         eyebrow="Global leader playbook"
-        title="Five practical dos and don’ts"
-        subtitle="These are fast, memorable, and presentation-ready."
+        title="Five essential takeaways for global leaders"
+        subtitle="A high-visibility operating checklist for leading effectively in Lebanon."
       >
-        <div className="grid gap-6 lg:grid-cols-2">
-          <FadeIn>
-            <div className="rounded-[2rem] border border-tactical-300/20 bg-tactical-500/10 p-6 shadow-glow">
-              <div className="mb-5 flex items-center gap-3">
-                <BadgeCheck className="h-5 w-5 text-tactical-200" />
-                <h3 className="text-2xl font-semibold text-white">Do</h3>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {doItems.map((item, index) => (
+            <FadeIn key={item} delay={index * 0.04}>
+              <div className="rounded-[1.6rem] border border-tactical-300/20 bg-tactical-500/10 p-5 shadow-glow">
+                <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-xs font-semibold">
+                  0{index + 1}
+                </div>
+                <p className="text-sm leading-7 text-tactical-100">{item}</p>
               </div>
-              <div className="space-y-3">
-                {doItems.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm leading-7 text-tactical-100"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.06}>
-            <div className="rounded-[2rem] border border-amberish-300/20 bg-amberish-500/10 p-6 shadow-glow">
-              <div className="mb-5 flex items-center gap-3">
-                <MapPinned className="h-5 w-5 text-amberish-300" />
-                <h3 className="text-2xl font-semibold text-white">Don’t</h3>
-              </div>
-              <div className="space-y-3">
-                {dontItems.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 text-sm leading-7 text-amber-50"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </FadeIn>
+            </FadeIn>
+          ))}
         </div>
       </Section>
 
@@ -985,14 +935,21 @@ export default function Page() {
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
             <div className="mb-6 flex items-center gap-3">
               <Users className="h-5 w-5 text-tactical-200" />
-              <h3 className="text-2xl font-semibold text-white">Team members</h3>
+              <h3 className="font-display text-2xl font-semibold text-white">Team members</h3>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               {team.map((member) => (
                 <div key={member.email} className="rounded-[1.5rem] border border-white/10 bg-neutral-950/60 p-5">
                   <div className="text-lg font-semibold text-white">{member.name}</div>
-                  <div className="mt-1 text-sm text-neutral-400">{member.email}</div>
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="mt-1 block text-sm text-neutral-400 underline-offset-4 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {member.email}
+                  </a>
                   <div className="mt-4 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-neutral-200">
                     {member.role}
                   </div>
