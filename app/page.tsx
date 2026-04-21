@@ -9,18 +9,21 @@ import {
   FileText,
   Globe2,
   GraduationCap,
+  Handshake,
   Landmark,
   Layers3,
   LineChart as LineChartIcon,
+  Menu,
   MessageSquareMore,
   MonitorSmartphone,
   Mountain,
   ShieldCheck,
   Sparkles,
+  X,
   Users,
   Waypoints,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -166,10 +169,11 @@ const timeline = [
 
 const leadershipCards = [
   {
-    icon: MessageSquareMore,
+    icon: Handshake,
     title: "Communication",
     points: [
       "Wasta: Leadership and organizational success are heavily reliant on Wasta—the use of social networks, connections, and influence to achieve business goals. It acts as the primary \"social glue\" in Lebanese business environments (Yahchouchi, 2026).",
+      "Manager’s Tip: When hiring, expect candidates to be introduced through mutual connections; this is a trust-building mechanism, not necessarily nepotism.",
       "High-context communication rewards leaders who can interpret nuance, tone, and social signals before moving decisions forward.",
       "Leaders should avoid unnecessary public bluntness and protect dignity during disagreement.",
     ],
@@ -179,6 +183,7 @@ const leadershipCards = [
     title: "Authority",
     points: [
       "Paternalism: Organizational practices are highly paternalistic. Managers are expected to act as \"father figures,\" caring for the personal well-being and extended families of employees in exchange for absolute professional loyalty (Commisceo Global, 2026).",
+      "This paternalistic pattern reflects high power distance: managers make final decisions while keeping employees' family interests in mind.",
       "Status and hierarchy matter, especially early in a relationship.",
       "Formal authority works best when paired with warmth and credibility.",
     ],
@@ -203,6 +208,14 @@ const doItems = [
 ];
 
 const references = [
+  { text: "Commisceo Global. (2026). Lebanon - Culture, Customs and Etiquette.", url: "https://www.commisceo-global.com/resources/country-guides/lebanon-guide" },
+  { text: "Embassy of Lebanon. (2026). History and Geography of Lebanon.", url: "https://www.lebanonembassyus.org/history-geography" },
+  { text: "Hofstede Insights. (2021). Country Comparison: Lebanon.", url: "https://www.hofstede-insights.com/country-comparison-tool" },
+  { text: "House, R. J., Hanges, P. J., Javidan, M., Dorfman, P. W., & Gupta, V. (2004). Culture, Leadership, and Organizations: The GLOBE Study of 62 Societies. Sage Publications.", url: "https://sk.sagepub.com/books/culture-leadership-and-organizations" },
+  { text: "The Policy Initiative. (2025). Understanding Lebanon's Political Economy.", url: "https://www.thepolicyinitiative.org" },
+  { text: "World Bank. (2026). Lebanon Economic Monitor: A Fragile Rebound.", url: "https://openknowledge.worldbank.org/entities/publication/1d41204e-ab25-462b-95e1-679010838bd3" },
+  { text: "Yahchouchi, G. (2026). The Impact of Culture on Leadership Styles in Lebanon. ResearchGate.", url: "https://www.researchgate.net" },
+];
   "Commisceo Global. (2026). Lebanon - Culture, Customs and Etiquette.",
   "Embassy of Lebanon. (2026). History and Geography of Lebanon.",
   "Hofstede Insights. (2021). Country Comparison: Lebanon.",
@@ -230,6 +243,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
+    <section id={id} className="scroll-mt-20 mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
     <section id={id} className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
       <div className="max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-tactical-300">
@@ -296,7 +310,7 @@ function LebanonMap() {
         </div>
 
         <div className="relative min-h-[360px] rounded-[1.75rem] border border-white/10 bg-gradient-to-br from-neutral-950 to-tactical-950 p-4">
-          <svg viewBox="0 0 360 520" className="h-full w-full">
+          <svg viewBox="0 0 360 520" className="h-full w-full" role="img" aria-label="Topographic map showing the Bekaa Valley and Mount Lebanon">
             <defs>
               <linearGradient id="sea" x1="0" x2="1">
                 <stop offset="0%" stopColor="#0e7490" stopOpacity="0.2" />
@@ -357,20 +371,44 @@ function LebanonMap() {
 
 export default function Page() {
   const [framework, setFramework] = useState<Framework>("hall");
+  const [activeSection, setActiveSection] = useState<string>("overview");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const chartTitle = useMemo(() => {
     return framework === "hall"
-      ? "Hall framework: Lebanon trends high-context"
+      ? "Cultural Dimensions: Hall & Hofstede"
       : "GLOBE lens: regional proxy for leadership expectations";
   }, [framework]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible?.target?.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: [0.2, 0.4, 0.6] },
+    );
+
+    nav.forEach(([id]) => {
+      const node = document.getElementById(id);
+      if (node) observer.observe(node);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-neutral-950 text-white">
+    <main id="top" className="relative min-h-screen overflow-x-hidden bg-[#0B0C10] text-white">
       <div className="pointer-events-none absolute inset-0 bg-mesh opacity-60" />
       <div className="pointer-events-none absolute inset-0 grid-overlay opacity-20" />
       <div className="pointer-events-none absolute left-[-10%] top-[-6%] h-[420px] w-[420px] rounded-full bg-tactical-500/20 blur-3xl" />
       <div className="pointer-events-none absolute bottom-[-8%] right-[-8%] h-[420px] w-[420px] rounded-full bg-amberish-500/15 blur-3xl" />
 
+      <header className="sticky top-0 z-50 border-b border-[#1f2833] bg-black/60 backdrop-blur-xl">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-4 md:px-10">
           <div className="flex items-center gap-3">
@@ -388,13 +426,33 @@ export default function Page() {
               <a
                 key={id}
                 href={`#${id}`}
-                className="rounded-full px-4 py-2 text-sm text-neutral-300 transition hover:bg-white/5 hover:text-white"
+                className={`rounded-full px-4 py-2 text-sm transition ${
+                  activeSection === id
+                    ? "border border-[#FF4500]/60 text-[#FF4500]"
+                    : "text-neutral-300 hover:bg-white/5 hover:text-white"
+                }`}
               >
                 {label}
               </a>
             ))}
           </nav>
 
+          <div className="flex items-center gap-2">
+            <a
+              href="#references"
+              className="hidden items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10 md:inline-flex"
+            >
+              References
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <button
+              className="inline-flex rounded-xl border border-white/10 bg-white/5 p-2 text-white xl:hidden"
+              onClick={() => setMobileNavOpen((v) => !v)}
+              aria-label="Toggle navigation menu"
+            >
+              {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
+          </div>
           <a
             href="#references"
             className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
@@ -403,6 +461,22 @@ export default function Page() {
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>
+        {mobileNavOpen ? (
+          <div className="mx-6 mb-4 grid gap-2 rounded-xl border border-[#1f2833] bg-[#1F2833]/80 p-3 xl:hidden">
+            {nav.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setMobileNavOpen(false)}
+                className={`rounded-lg px-3 py-2 text-sm ${
+                  activeSection === id ? "text-[#FF4500]" : "text-neutral-200"
+                }`}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        ) : null}
       </header>
 
       <section className="relative mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-16">
@@ -444,14 +518,14 @@ export default function Page() {
             >
               <a
                 href="#overview"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-neutral-950 transition hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#FF4500] px-5 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
               >
                 Explore the site
                 <ArrowRight className="h-4 w-4" />
               </a>
               <a
                 href="#team"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-xl border border-[#FF4500]/40 bg-[#FF4500]/15 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#FF4500]/25"
               >
                 Meet the team
                 <ChevronRight className="h-4 w-4" />
@@ -511,6 +585,15 @@ export default function Page() {
               </div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-6 py-8 md:px-8">
+        <div className="rounded-[1.2rem] border border-[#1f2833] bg-[#1F2833]/60 p-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#FF4500]">60-second executive summary</p>
+          <p className="mt-3 max-w-4xl text-sm leading-7 text-neutral-200">
+            Lebanon leadership is best understood through two primary lenses—<strong>High-Context</strong> communication and <strong>Hofstede power distance/collectivism</strong>—then stress-tested with GLOBE assertiveness. Geography and confessional institutions shaped resilient in-group cultures; today, managers operate in a fragile rebound after the 2019 crisis where <strong>Wasta</strong>, <strong>Paternalism</strong>, and trust-first coordination strongly influence execution.
+          </p>
         </div>
       </section>
 
@@ -581,6 +664,7 @@ export default function Page() {
             <h3 className="mt-6 text-2xl font-semibold text-white">{chartTitle}</h3>
             <p className="mt-4 text-sm leading-7 text-neutral-300">
               {framework === "hall"
+                ? "High-Context communication means meaning is embedded in the physical context or internalized in the person, rather than explicitly stated. Hofstede’s Power Distance: Lebanon scores high; hierarchies are accepted as a natural part of the social order, and authority is rarely challenged directly in business settings (Yahchouchi, 2026). Hofstede’s Collectivism: High collectivism. The \"in-group\" (family and religious community) takes precedence over the individual, making loyalty paramount (Hofstede, 2021)."
                 ? "Hofstede’s Power Distance: Lebanon scores high; hierarchies are accepted as a natural part of the social order, and authority is rarely challenged directly in business settings (Yahchouchi, 2026). Hofstede’s Collectivism: High collectivism. The \"in-group\" (family and religious community) takes precedence over the individual, making loyalty paramount (Hofstede, 2021)."
                 : "GLOBE Study - Assertiveness: Lebanese culture tends to be highly assertive and expressive, placing a strong premium on robust negotiation skills and charismatic communication (House et al., 2004)."}
             </p>
@@ -692,7 +776,7 @@ export default function Page() {
             </p>
 
             <div className="mt-6 space-y-3">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-neutral-200">Identity matters because local communities and religious groups mattered for survival.</div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-neutral-200">Mount Lebanon refuge effect: This geography shaped the values of resilience and in-group loyalty by providing a physical refuge for minority groups.</div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-neutral-200">Trade mattered because the coast connected Lebanon to outside ideas and markets.</div>
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-neutral-200">Resilience matters because instability made adaptability a real leadership requirement.</div>
             </div>
@@ -812,6 +896,7 @@ export default function Page() {
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
               <div className="text-sm font-semibold text-white">Executive takeaway</div>
               <p className="mt-3 text-sm leading-7 text-neutral-300">
+                Economy: The World Bank characterizes the current state as a "Fragile Rebound." Real GDP expanded by 3.5% in 2025, signaling a slow recovery from the 2019 financial crisis, operating heavily in a cash-based environment (World Bank, 2026). Politics: The government operates under "Confessionalism," a power-sharing agreement where legislative and executive seats are distributed according to religious demographics, which heavily dictates resource distribution and institutional leadership (Policy Initiative, 2025).
                 Economy: The World Bank characterizes the current state as a "Fragile Rebound." Real GDP expanded by 3.5% in 2025, signaling a slow recovery from the 2019 financial crisis, operating heavily in a cash-based environment (World Bank, 2026). Politics: The government operates under "Confessionalism," a power-sharing system divided among religious sects, which heavily dictates resource distribution and institutional leadership (Policy Initiative, 2025).
               </p>
             </div>
@@ -828,6 +913,7 @@ export default function Page() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {doItems.map((item, index) => (
             <FadeIn key={item} delay={index * 0.04}>
+              <div className="rounded-[1.6rem] border border-tactical-300/20 bg-tactical-500/10 p-5 shadow-glow transition-transform hover:scale-105">
               <div className="rounded-[1.6rem] border border-tactical-300/20 bg-tactical-500/10 p-5 shadow-glow">
                 <div className="mb-3 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-xs font-semibold">
                   0{index + 1}
@@ -860,6 +946,25 @@ export default function Page() {
             ))}
           </div>
         </div>
+        <details className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow" open>
+          <summary className="cursor-pointer list-none text-sm font-semibold text-white">
+            Click to expand bibliography
+          </summary>
+          <div className="mt-4 space-y-3 text-sm leading-7 text-neutral-200 md:text-base">
+            {references.map((reference, index) => (
+              <FadeIn key={reference.text} delay={index * 0.04}>
+                <a
+                  href={reference.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-2xl border border-white/10 bg-neutral-950/50 px-4 py-3 hover:border-[#FF4500]/60"
+                >
+                  {reference.text}
+                </a>
+              </FadeIn>
+            ))}
+          </div>
+        </details>
       </Section>
 
       <Section
@@ -899,6 +1004,12 @@ export default function Page() {
             <div className="rounded-[2rem] border border-white/10 bg-neutral-900/80 p-6 shadow-glow">
               <div className="mb-5 flex items-center gap-3">
                 <BadgeCheck className="h-5 w-5 text-white" />
+                <h3 className="font-display text-xl font-semibold text-white">Research call-out</h3>
+              </div>
+              <div className="space-y-3 text-sm leading-7 text-neutral-300">
+                <p>
+                  “Leadership and organizational success are heavily reliant on social networks and influence in Lebanese business environments.” (Yahchouchi, 2026)
+                </p>
                 <h3 className="font-display text-xl font-semibold text-white">Final project quality check</h3>
               </div>
               <div className="space-y-3 text-sm leading-7 text-neutral-300">
@@ -917,6 +1028,16 @@ export default function Page() {
           </div>
         </div>
       </Section>
+      <footer className="border-t border-[#1f2833] px-6 py-8 text-center text-sm text-neutral-400">
+        © 2026 University of San Diego MBA | Global Leadership Project.
+      </footer>
+      <a
+        href="#top"
+        className="fixed bottom-6 right-6 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#FF4500] text-white shadow-lg transition hover:scale-105"
+        aria-label="Back to top"
+      >
+        ↑
+      </a>
     </main>
   );
 }
