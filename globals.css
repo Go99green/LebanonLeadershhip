@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-neutral-950 text-neutral-100 antialiased;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+::selection {
+  background: rgba(126, 183, 167, 0.25);
+  color: #ffffff;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  backdrop-filter: blur(18px);
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.chart-card :where(.recharts-default-tooltip) {
+  border-radius: 16px !important;
+}
