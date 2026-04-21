@@ -214,46 +214,58 @@ const dontItems = [
 
 const sources = [
   {
+    id: 1,
     title: "The Art and Science of Leadership, 8th ed. — course text",
     url: "https://www.pearson.com/en-us/subject-catalog/p/the-art-and-science-of-leadership/P200000004089/9780138123666",
     type: "Course text",
   },
   {
+    id: 2,
     title: "GLOBE Project — Middle East Results",
     url: "https://globeproject.com/results/clusters/middle-east%3Fmenu%3Dlist.html",
     type: "Framework",
   },
   {
+    id: 3,
     title: "Britannica — Lebanon overview",
     url: "https://www.britannica.com/place/Lebanon",
     type: "Country overview",
   },
   {
+    id: 4,
     title: "Britannica — History of Lebanon",
     url: "https://www.britannica.com/topic/history-of-Lebanon",
     type: "History",
   },
   {
+    id: 5,
     title: "World Bank — Lebanon Economic Monitor",
     url: "https://www.worldbank.org/en/country/lebanon/publication/lebanon-economic-monitor",
     type: "Economy",
   },
   {
+    id: 6,
     title: "World Bank — Lebanon Economic Monitor, Winter 2025: A Fragile Rebound",
     url: "https://openknowledge.worldbank.org/entities/publication/1d41204e-ab25-462b-95e1-679010838bd3",
     type: "Economy",
   },
   {
+    id: 7,
     title: "De Gruyter Brill — Lebanese conversational style and cultural values",
     url: "https://www.degruyterbrill.com/document/doi/10.1515/ip-2021-5001/html",
     type: "Communication",
   },
   {
+    id: 8,
     title: "Cultural Atlas — Lebanese business culture",
     url: "https://culturalatlas.sbs.com.au/lebanese-culture/lebanese-culture-business-culture",
     type: "Business culture",
   },
 ];
+
+function Cite({ refs }: { refs: number[] }) {
+  return <sup className="ml-1 text-tactical-200">[{refs.join(", ")}]</sup>;
+}
 
 function Section({
   id,
@@ -421,7 +433,7 @@ export default function Page() {
             </div>
             <div>
               <div className="text-sm font-semibold text-white">Lebanon Leadership Project</div>
-              <div className="text-xs tracking-wide text-neutral-400">MBA group website • GitHub + Vercel ready</div>
+              <div className="text-xs tracking-wide text-neutral-400">MBA global leadership analysis • Lebanon focus</div>
             </div>
           </div>
 
@@ -491,9 +503,8 @@ export default function Page() {
               transition={{ duration: 0.7, delay: 0.12 }}
               className={`mt-6 max-w-3xl text-neutral-300 ${compact ? "text-lg leading-8" : "text-base leading-8 md:text-lg"}`}
             >
-              A premium one-page website designed to look like a real strategy product, not a standard
-              student deck. It combines cultural frameworks, historical context, business implications,
-              and polished data visualization to show how leadership works in Lebanon.
+              This analysis explains how geography, history, institutions, and economic conditions shape
+              leadership behavior in Lebanon and what managers should do in practice.<Cite refs={[1, 3, 4, 6, 8]} />
             </motion.p>
 
             <motion.div
@@ -522,7 +533,7 @@ export default function Page() {
               <Pill>Hall framework</Pill>
               <Pill>GLOBE lens</Pill>
               <Pill>Charts and visuals</Pill>
-              <Pill>GitHub + Vercel deployment</Pill>
+              <Pill>Source-cited analysis</Pill>
             </div>
           </div>
 
@@ -578,7 +589,7 @@ export default function Page() {
         id="overview"
         eyebrow="Executive overview"
         title="Why Lebanon is such a strong leadership case"
-        subtitle="This site is built to show that your group understands the country, the theory, and the practical management implications."
+        subtitle="This executive summary combines evidence on geography, politics, economy, and social norms to explain leadership realities in Lebanon."
       >
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {snapshot.map((item, index) => {
@@ -593,7 +604,10 @@ export default function Page() {
                     <Pill>{item.tag}</Pill>
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-neutral-300">{item.text}</p>
+                  <p className="mt-3 text-sm leading-7 text-neutral-300">
+                    {item.text}
+                    <Cite refs={[3, 4, 5, 6]} />
+                  </p>
                 </div>
               </FadeIn>
             );
@@ -609,7 +623,7 @@ export default function Page() {
         id="frameworks"
         eyebrow="Framework application"
         title="Theory becomes more powerful when it becomes visual"
-        subtitle="Use the toggle to move between Hall and GLOBE during the live presentation. It makes the team look polished and deliberate."
+        subtitle="Compare Hall's communication lens and the GLOBE regional profile to translate culture into leadership expectations."
       >
         <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr]">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
@@ -641,6 +655,7 @@ export default function Page() {
               {framework === "hall"
                 ? "Lebanon fits a relationship-heavy, high-context communication style. Leaders need to pay attention to the room, the relationship, and the dignity of the other person, not only the message itself."
                 : "The GLOBE section uses the Middle East cluster as a directional proxy rather than a Lebanon-specific score. It helps explain why in-group loyalty, hierarchy, and decisive leadership matter so much in practice."}
+              <Cite refs={framework === "hall" ? [1, 7, 8] : [1, 2, 8]} />
             </p>
 
             <div className="mt-6 grid gap-3">
@@ -725,7 +740,8 @@ export default function Page() {
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-5">
               <div className="text-sm font-semibold text-white">What makes this strong</div>
               <p className="mt-3 text-sm leading-7 text-neutral-300">
-                Instead of throwing frameworks onto a slide, this site turns them into an actual interpretation tool. That makes your team look analytical, intentional, and digitally fluent.
+                These frameworks are used as decision tools, not decoration. They connect communication norms,
+                status expectations, and leadership style to real management choices.<Cite refs={[1, 2, 7, 8]} />
               </p>
             </div>
           </div>
@@ -746,6 +762,7 @@ export default function Page() {
             </div>
             <p className="text-sm leading-7 text-neutral-300">
               Lebanon’s cultural environment was not shaped by one force. It comes from the overlap of geography, trade, communal identity, political balancing, diaspora influence, and repeated crisis. Those conditions reward leaders who can build trust, navigate nuance, and stay adaptive.
+              <Cite refs={[3, 4, 5, 6]} />
             </p>
 
             <div className="mt-6 space-y-3">
@@ -764,7 +781,10 @@ export default function Page() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                    <p className="mt-2 text-sm leading-7 text-neutral-300">{item.text}</p>
+                    <p className="mt-2 text-sm leading-7 text-neutral-300">
+                      {item.text}
+                      <Cite refs={[3, 4]} />
+                    </p>
                   </div>
                 </div>
               </FadeIn>
@@ -777,7 +797,7 @@ export default function Page() {
         id="leadership"
         eyebrow="Leadership implications"
         title="What effective managers should do differently in Lebanon"
-        subtitle="This is the strongest section to talk through out loud because it converts culture into action."
+        subtitle="These leadership implications translate Lebanese context into practical operating behavior for managers."
       >
         <div className="grid gap-6 xl:grid-cols-3">
           {leadershipCards.map((card, index) => {
@@ -867,6 +887,7 @@ export default function Page() {
               <div className="text-sm font-semibold text-white">Executive takeaway</div>
               <p className="mt-3 text-sm leading-7 text-neutral-300">
                 The best foreign managers in Lebanon usually do not win by being the most blunt or the most procedural. They win by being credible, tactful, steady, and genuinely good at relationships.
+                <Cite refs={[1, 7, 8]} />
               </p>
             </div>
           </div>
@@ -924,7 +945,7 @@ export default function Page() {
         id="sources"
         eyebrow="Credibility and sourcing"
         title="A source section that makes the project feel serious"
-        subtitle="These links support the academic and business framing of the site. Add any additional course slides or professor guidance if your group wants even more depth."
+        subtitle="Every major claim in this project maps to referenced material listed below."
       >
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {sources.map((source, index) => (
@@ -940,7 +961,7 @@ export default function Page() {
                   <ArrowRight className="h-4 w-4 text-neutral-400 transition group-hover:text-white" />
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-white">{source.title}</h3>
-                <p className="mt-3 text-sm text-neutral-400">Open source</p>
+                <p className="mt-3 text-sm text-neutral-400">Reference [{source.id}]</p>
               </a>
             </FadeIn>
           ))}
@@ -949,16 +970,16 @@ export default function Page() {
         <div className="mt-8 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
           <div className="text-sm font-semibold text-white">Important note on the GLOBE section</div>
           <p className="mt-3 text-sm leading-7 text-neutral-300">
-            The GLOBE content on this site is presented as a regional Middle East cluster proxy, not as an official Lebanon-specific GLOBE country score. That distinction makes the site stronger academically because it is transparent about the limits of the underlying framework.
+            The GLOBE content on this site is presented as a regional Middle East cluster proxy, not as an official Lebanon-specific GLOBE country score. That distinction keeps the analysis academically transparent about what the underlying data can and cannot claim.<Cite refs={[2]} />
           </p>
         </div>
       </Section>
 
       <Section
         id="team"
-        eyebrow="Team and deployment"
-        title="Built like a real product, ready for GitHub and Vercel"
-        subtitle="This section helps your group look organized, modern, and genuinely strong at digital presentation."
+        eyebrow="Team authorship"
+        title="Research team and synthesis ownership"
+        subtitle="The following members produced the Lebanon leadership analysis and presentation."
       >
         <div className="grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-glow">
@@ -984,13 +1005,14 @@ export default function Page() {
             <div className="rounded-[2rem] border border-white/10 bg-neutral-900/80 p-6 shadow-glow">
               <div className="mb-5 flex items-center gap-3">
                 <Github className="h-5 w-5 text-white" />
-                <h3 className="text-xl font-semibold text-white">GitHub + Vercel flow</h3>
+                <h3 className="text-xl font-semibold text-white">Citation index</h3>
               </div>
               <div className="space-y-3 text-sm leading-7 text-neutral-300">
-                <p>1. Create a GitHub repo and upload this full project folder.</p>
-                <p>2. In Vercel, import the repo and accept the default Next.js settings.</p>
-                <p>3. Deploy and use the live link in class on laptop or projector.</p>
-                <p>4. Keep Website mode for browsing and Presentation mode for presenting.</p>
+                <p>[1] Leadership theory foundation for cross-cultural management interpretation.</p>
+                <p>[2] GLOBE Middle East cluster indicators used as regional directional evidence.</p>
+                <p>[3]-[4] Geographic and historical context for cultural pattern formation in Lebanon.</p>
+                <p>[5]-[6] Economic conditions and institutional pressures shaping current leadership realities.</p>
+                <p>[7]-[8] Communication and business-culture evidence for interpersonal leadership norms.</p>
               </div>
             </div>
 
