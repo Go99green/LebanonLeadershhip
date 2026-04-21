@@ -4,6 +4,9 @@
 
 :root {
   color-scheme: dark;
+  --tactical-black: #0b0c10;
+  --tactical-green: #1f2833;
+  --tactical-orange: #ff4500;
 }
 
 html {
@@ -11,8 +14,18 @@ html {
 }
 
 body {
-  @apply bg-neutral-950 text-neutral-100 antialiased;
+  @apply text-neutral-100 antialiased;
+  background-color: var(--tactical-black);
+  font-family: "Inter", "Roboto", "Segoe UI", system-ui, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.font-display {
+  font-family: "Playfair Display", "Times New Roman", Georgia, serif;
+}
+
+.text-tactical-orange {
+  color: #ff4500;
 }
 
 ::selection {
