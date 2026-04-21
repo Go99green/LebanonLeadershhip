@@ -238,6 +238,10 @@ const references: ReferenceItem[] = [
   },
 ];
 
+function Cite({ refs }: { refs: number[] }) {
+  return <sup className="ml-1 text-tactical-200">[{refs.join(", ")}]</sup>;
+}
+
 function Section({
   id,
   eyebrow,
@@ -460,6 +464,13 @@ export default function Page() {
               {mobileNavOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
+          <a
+            href="#references"
+            className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/10"
+          >
+            References
+            <ArrowRight className="h-4 w-4" />
+          </a>
         </div>
         {mobileNavOpen ? (
           <div className="mx-6 mb-4 grid gap-2 rounded-xl border border-[#1f2833] bg-[#1F2833]/80 p-3 xl:hidden">
@@ -790,7 +801,10 @@ export default function Page() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                    <p className="mt-2 text-sm leading-7 text-neutral-300">{item.text}</p>
+                    <p className="mt-2 text-sm leading-7 text-neutral-300">
+                      {item.text}
+                      <Cite refs={[3, 4]} />
+                    </p>
                   </div>
                 </div>
               </FadeIn>
