@@ -14,7 +14,6 @@ import {
   Layers3,
   LineChart as LineChartIcon,
   Menu,
-  MessageSquareMore,
   MonitorSmartphone,
   Mountain,
   ShieldCheck,
