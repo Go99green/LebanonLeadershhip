@@ -12,7 +12,12 @@ html {
 
 body {
   @apply bg-neutral-950 text-neutral-100 antialiased;
+  font-family: "Inter", "Roboto", "Segoe UI", system-ui, sans-serif;
   font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+.font-display {
+  font-family: "Playfair Display", "Times New Roman", Georgia, serif;
 }
 
 ::selection {
