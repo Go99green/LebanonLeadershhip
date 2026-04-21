@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lebanon Leadership Project",
+  title: "Leadership Analysis: Lebanon | USD MBA",
   description:
-    "A premium MBA group website on culture, leadership, and organizational practice in Lebanon.",
+    "A comprehensive analysis of Lebanese leadership through the lens of Hall, Hofstede, and GLOBE frameworks.",
 };
 
 export default function RootLayout({
