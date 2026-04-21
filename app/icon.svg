@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Lebanese cedar icon">
+  <rect width="256" height="256" rx="36" fill="#0B0C10"/>
+  <path d="M128 32l-28 34h18l-34 30h22l-42 34h28l-30 30h132l-30-30h28l-42-34h22l-34-30h18z" fill="#1f7a5c"/>
+  <rect x="118" y="160" width="20" height="44" rx="4" fill="#8b5e3c"/>
+</svg>
