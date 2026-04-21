@@ -238,6 +238,10 @@ const references: ReferenceItem[] = [
   },
 ];
 
+function Cite({ refs }: { refs: number[] }) {
+  return <sup className="ml-1 text-tactical-200">[{refs.join(", ")}]</sup>;
+}
+
 function Section({
   id,
   eyebrow,
@@ -783,7 +787,10 @@ export default function Page() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-white">{item.title}</h4>
-                    <p className="mt-2 text-sm leading-7 text-neutral-300">{item.text}</p>
+                    <p className="mt-2 text-sm leading-7 text-neutral-300">
+                      {item.text}
+                      <Cite refs={[3, 4]} />
+                    </p>
                   </div>
                 </div>
               </FadeIn>
